@@ -1,7 +1,13 @@
 import type { Metadata } from "next";
 import "./globals.css";
 
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://asset.richchoi.kr";
+
 export const metadata: Metadata = {
+  metadataBase: new URL(siteUrl),
+  alternates: {
+    canonical: "/",
+  },
   title: {
     default: "내 자산 포트폴리오 | 자산과 부채를 한눈에",
     template: "%s | 내 자산 포트폴리오",
@@ -10,6 +16,7 @@ export const metadata: Metadata = {
   keywords: ["자산관리", "자산 포트폴리오", "순자산", "자산 비중", "대출 관리", "저축 관리"],
   applicationName: "내 자산 포트폴리오",
   openGraph: {
+    url: "/",
     title: "내 자산 포트폴리오 | 자산과 부채를 한눈에",
     description: "내 자산을 직접 기록하고 총자산, 순자산과 자산 비중을 한눈에 확인하세요.",
     type: "website",
