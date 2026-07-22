@@ -17,9 +17,9 @@ export default function TermsPage() {
         <p className="legal-kicker">TERMS</p>
         <h1>서비스 이용약관</h1>
         <p className="legal-lead">이 약관은 내 자산 포트폴리오가 제공하는 자산 기록·관리 기능의 이용 조건을 안내합니다.</p>
-        <div className="legal-draft-notice"><strong>공개 전 확인 필요</strong><span>문의 연락처와 시행일은 정식 배포 전에 확정할 예정입니다.</span></div>
+        <div className="legal-draft-notice"><strong>공개 전 확인 필요</strong><span>시행일은 정식 배포 전에 확정할 예정입니다.</span></div>
 
-        <div className="legal-operator-info"><div><b>서비스 운영자</b><span>richchoi_studio</span></div><div><b>문의 연락처</b><span>정식 공개 전 확정 예정</span></div></div>
+        <div className="legal-operator-info"><div><b>서비스 운영자</b><span>richchoi_studio</span></div><div><b>문의 연락처</b><a href="mailto:whynot12s@naver.com">whynot12s@naver.com</a></div></div>
 
         <section><h2>1. 서비스 목적</h2><p>서비스는 사용자가 직접 입력한 자산, 부채, 수입, 지출과 저축 기록을 한눈에 확인하고 관리할 수 있도록 계산·시각화·점검 정보를 제공합니다.</p></section>
         <section><h2>2. 계정 이용</h2><ul><li>회원은 본인이 사용 권한을 가진 로그인 계정을 이용해야 합니다.</li><li>회원은 계정 접근정보가 타인에게 노출되지 않도록 관리해야 합니다.</li><li>비정상적인 접근이나 서비스 방해 행위가 확인되면 이용이 제한될 수 있습니다.</li></ul></section>
