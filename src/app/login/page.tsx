@@ -14,6 +14,29 @@ import { getFirebaseAuth, isFirebaseConfigured } from "@/lib/firebase/client";
 
 type Mode = "login" | "signup";
 
+function getGoogleSignInErrorMessage(error: unknown) {
+  const code = typeof error === "object" && error !== null && "code" in error
+    ? String(error.code)
+    : "unknown";
+
+  switch (code) {
+    case "auth/popup-blocked":
+      return "브라우저가 Google 로그인 창을 차단했습니다. 주소창의 팝업 허용 설정을 확인해 주세요. (auth/popup-blocked)";
+    case "auth/popup-closed-by-user":
+      return "Google 로그인 창이 완료 전에 닫혔습니다. 다시 시도해 주세요. (auth/popup-closed-by-user)";
+    case "auth/cancelled-popup-request":
+      return "Google 로그인 요청이 중복되었습니다. 잠시 후 한 번만 눌러 주세요. (auth/cancelled-popup-request)";
+    case "auth/unauthorized-domain":
+      return "현재 사이트 주소가 Firebase 로그인 허용 목록에 없습니다. 운영자에게 알려 주세요. (auth/unauthorized-domain)";
+    case "auth/network-request-failed":
+      return "네트워크 연결 문제로 Google 로그인을 완료하지 못했습니다. 인터넷 연결을 확인해 주세요. (auth/network-request-failed)";
+    case "auth/operation-not-supported-in-this-environment":
+      return "현재 브라우저 환경에서는 Google 팝업 로그인을 사용할 수 없습니다. 일반 브라우저에서 다시 시도해 주세요. (auth/operation-not-supported-in-this-environment)";
+    default:
+      return `Google 로그인을 완료하지 못했습니다. 오류 코드: ${code}`;
+  }
+}
+
 export default function LoginPage() {
   const [mode, setMode] = useState<Mode>("login");
   const [email, setEmail] = useState("");
@@ -82,8 +105,9 @@ export default function LoginPage() {
       provider.setCustomParameters({ prompt: "select_account" });
       await signInWithPopup(getFirebaseAuth(), provider);
       window.location.href = "/dashboard";
-    } catch {
-      setMessage("Google 로그인을 완료하지 못했습니다. 팝업 차단 여부를 확인해 주세요.");
+    } catch (error) {
+      console.error("Google sign-in failed", error);
+      setMessage(getGoogleSignInErrorMessage(error));
       setLoading(false);
     }
   }
