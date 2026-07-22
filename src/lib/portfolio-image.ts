@@ -15,9 +15,10 @@ function loadImage(src: string) {
 }
 
 export async function createPortfolioImageBlob({ hideAmounts = false, siteUrl }: PortfolioImageOptions = {}) {
-  const portfolio = document.querySelector<HTMLElement>(".dashboard-grid");
+  const allocation = document.querySelector<HTMLElement>(".allocation-panel");
+  const rank = document.querySelector<HTMLElement>(".rank-card");
   const coach = document.querySelector<HTMLElement>("#financial-coach");
-  if (!portfolio || !coach) throw new Error("저장할 포트폴리오 카드를 찾지 못했습니다.");
+  if (!allocation || !rank || !coach) throw new Error("저장할 포트폴리오 카드를 찾지 못했습니다.");
 
   try {
     if (hideAmounts) {
@@ -26,19 +27,25 @@ export async function createPortfolioImageBlob({ hideAmounts = false, siteUrl }:
     }
 
     const captureOptions = { backgroundColor: "#f5f7fb", pixelRatio: 2, cacheBust: true };
-    const [portfolioUrl, coachUrl] = await Promise.all([
-      toPng(portfolio, captureOptions),
+    const [allocationUrl, rankUrl, coachUrl] = await Promise.all([
+      toPng(allocation, captureOptions),
+      toPng(rank, captureOptions),
       toPng(coach, captureOptions),
     ]);
-    const [portfolioImage, coachImage] = await Promise.all([loadImage(portfolioUrl), loadImage(coachUrl)]);
+    const [allocationImage, rankImage, coachImage] = await Promise.all([
+      loadImage(allocationUrl),
+      loadImage(rankUrl),
+      loadImage(coachUrl),
+    ]);
 
     const padding = 60;
     const headerHeight = 190;
     const gap = 36;
     const footerHeight = siteUrl ? 115 : 0;
     const canvas = document.createElement("canvas");
-    canvas.width = Math.max(portfolioImage.width, coachImage.width) + padding * 2;
-    canvas.height = headerHeight + portfolioImage.height + coachImage.height + gap + footerHeight + padding;
+    const contentWidth = Math.max(allocationImage.width, rankImage.width, coachImage.width);
+    canvas.width = contentWidth + padding * 2;
+    canvas.height = headerHeight + allocationImage.height + rankImage.height + coachImage.height + gap * 2 + footerHeight + padding;
     const context = canvas.getContext("2d");
     if (!context) throw new Error("이미지 생성 기능을 사용할 수 없습니다.");
 
@@ -58,7 +65,7 @@ export async function createPortfolioImageBlob({ hideAmounts = false, siteUrl }:
     context.fillText("내 포트폴리오", padding, 96);
     context.fillStyle = "rgba(255,255,255,.78)";
     context.font = "19px Arial, sans-serif";
-    context.fillText("자산 비중 · 내 자산 목록 · 자산 건강 코치", padding, 129);
+    context.fillText("자산 비중 · 내 연령대 자산 등급 · 자산 건강 코치", padding, 129);
     context.fillStyle = "rgba(255,255,255,.16)";
     context.beginPath();
     context.roundRect(canvas.width - padding - 185, 46, 185, 48, 24);
@@ -69,11 +76,16 @@ export async function createPortfolioImageBlob({ hideAmounts = false, siteUrl }:
     context.fillText(`${new Date().toLocaleDateString("ko-KR")} 기준`, canvas.width - padding - 92.5, 77);
     context.textAlign = "left";
 
-    context.drawImage(portfolioImage, padding, headerHeight);
-    context.drawImage(coachImage, padding, headerHeight + portfolioImage.height + gap);
+    const centeredX = (image: HTMLImageElement) => padding + (contentWidth - image.width) / 2;
+    let nextY = headerHeight;
+    context.drawImage(allocationImage, centeredX(allocationImage), nextY);
+    nextY += allocationImage.height + gap;
+    context.drawImage(rankImage, centeredX(rankImage), nextY);
+    nextY += rankImage.height + gap;
+    context.drawImage(coachImage, centeredX(coachImage), nextY);
 
     if (siteUrl) {
-      const footerTop = headerHeight + portfolioImage.height + coachImage.height + gap + 24;
+      const footerTop = headerHeight + allocationImage.height + rankImage.height + coachImage.height + gap * 2 + 24;
       context.fillStyle = "#eef2fb";
       context.beginPath();
       context.roundRect(padding, footerTop, canvas.width - padding * 2, 82, 18);
