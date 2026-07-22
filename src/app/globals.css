@@ -546,3 +546,239 @@ body { font-size: 16px; }
 .legal-effective-date { margin: 27px 0 0; color: #8b94a3; font-size: 13px; text-align: right; }
 .auth-terms a { color: #6472a8; font-weight: 800; }
 @media (max-width: 650px) { .legal-header { width: calc(100% - 32px); }.legal-main { width: calc(100% - 32px); margin-top: 14px; padding: 35px 23px; border-radius: 18px; }.legal-main h1 { font-size: 31px; }.legal-table > div,.legal-operator-info > div { grid-template-columns: 1fr; }.legal-table b,.legal-operator-info b { padding-bottom: 4px; }.legal-table span,.legal-operator-info span { padding-top: 4px; }.landing-footer-links { flex-wrap: wrap; } }
+
+/* Mobile layout: desktop rules above stay unchanged. */
+@media (max-width: 650px) {
+  html { scroll-padding-top: 76px; }
+  body { min-width: 320px; overflow-x: hidden; }
+  .app-shell, .app-shell > main, .summary-grid, .dashboard-grid, .feature-grid, .panel,
+  .landing-page, .landing-main, .landing-header, .landing-hero, .landing-hero-copy, .landing-preview { min-width: 0; max-width: 100%; }
+
+  /* Shared mobile header and dashboard spacing */
+  .topbar { position: sticky; top: 0; z-index: 50; height: 62px; padding: 0 14px; backdrop-filter: blur(14px); }
+  .topbar .brand { gap: 8px; font-size: 14px; }
+  .topbar .brand-mark { width: 31px; height: 31px; border-radius: 10px; }
+  .header-actions { gap: 6px; }
+  .user-menu { gap: 6px; }
+  .user-avatar { width: 31px; height: 31px; }
+  .user-menu button { min-height: 34px; padding: 0 9px; font-size: 11px; }
+  .app-shell > main { padding: 27px 14px 24px; }
+  .hero { gap: 15px; margin-bottom: 18px; }
+  .hero .eyebrow { margin-bottom: 7px; font-size: 11px; }
+  .hero h1 { font-size: 30px; line-height: 1.22; letter-spacing: -1.4px; }
+  .hero-copy { margin-top: 9px; font-size: 14px; line-height: 1.55; }
+  .hero-actions { gap: 7px; }
+  .image-export-card { min-width: 0; min-height: 54px; padding: 9px 12px; }
+  .image-export-icon { width: 31px; height: 31px; }
+  .image-privacy-option { margin-top: 5px; font-size: 11px; }
+  .sample-note { justify-content: center; font-size: 11px; white-space: normal; text-align: center; }
+
+  /* Compact overview cards without shrinking important numbers too far */
+  .summary-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; margin-bottom: 14px; }
+  .summary-card { min-width: 0; padding: 16px 14px; border-radius: 16px; }
+  .summary-grid .rank-card { grid-column: 1 / -1; }
+  .card-label-row { min-width: 0; align-items: flex-start; flex-direction: column; gap: 6px; margin-bottom: 11px; font-size: 13px; }
+  .card-label-row > span:first-child { line-height: 1.35; }
+  .trend, .neutral-pill, .debt-pill, .income-pill, .expense-pill, .estimate-pill { max-width: 100%; padding: 5px 7px; font-size: 10px; line-height: 1.25; white-space: normal; }
+  .trend svg { width: 14px; flex: 0 0 14px; }
+  .summary-link > strong { display: block; overflow-wrap: anywhere; font-size: clamp(19px, 5.5vw, 25px); line-height: 1.12; letter-spacing: -1px; }
+  .summary-link > strong small { margin-left: 3px; font-size: 11px; }
+  .summary-link > p { display: none; }
+  .summary-card.primary-card:after { width: 92px; height: 92px; right: -38px; top: -42px; }
+  .rank-card .card-label-row { align-items: center; flex-direction: row; }
+  .rank-card .card-label-row > span:first-child { flex: 1; }
+  .rank-value { align-items: flex-start; flex-direction: column; gap: 3px; }
+  .rank-value strong { font-size: 27px; }
+  .rank-value span { font-size: 12px; }
+  .rank-track { margin-top: 12px; }
+  .rank-labels { gap: 10px; font-size: 10px; }
+  .rank-labels span:last-child { text-align: right; }
+  .rank-grade-scale { gap: 3px; margin-top: 9px; }
+  .rank-grade-scale > span { padding: 5px 2px; }
+  .rank-grade-scale b { font-size: 9px; }
+  .rank-grade-scale small { font-size: 7px; }
+
+  /* Three quick links stay on one row instead of making a long stack */
+  .setup-progress { gap: 10px; margin-bottom: 14px; padding: 13px; border-radius: 15px; }
+  .setup-progress-title { gap: 9px; }
+  .setup-progress-title > span { width: 40px; height: 40px; border-radius: 11px; }
+  .setup-progress-title > span b { font-size: 15px; }
+  .setup-progress-title strong { font-size: 13px; }
+  .setup-progress-title small { font-size: 10px; }
+  .setup-progress-items { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; }
+  .setup-progress-items a { align-items: center; flex-direction: column; gap: 5px; padding: 8px 4px; text-align: center; }
+  .setup-progress-items i { width: 24px; height: 24px; flex-basis: 24px; }
+  .setup-progress-items span { font-size: 10px; line-height: 1.25; }
+  .setup-progress-items small { display: none; }
+  .official-source { margin: -2px 2px 14px; font-size: 11px; }
+
+  /* Main panels */
+  .dashboard-grid, .feature-grid { gap: 14px; margin-bottom: 14px; }
+  .panel, .feature-card { padding: 19px 16px; border-radius: 17px; }
+  .panel-heading { align-items: flex-start; gap: 10px; }
+  .panel-heading h2, .feature-content h2 { font-size: 20px; }
+  .panel-kicker { margin-bottom: 7px; font-size: 11px; }
+  .static-label { padding: 6px 8px; font-size: 10px; white-space: nowrap; }
+  .allocation-body { min-height: 0; display: grid; grid-template-columns: 112px minmax(0, 1fr); align-items: center; gap: 13px; padding: 15px 0 2px; }
+  .donut { width: 108px; flex-basis: 108px; }
+  .donut:after { inset: 17px; }
+  .donut-center span { font-size: 10px; }
+  .donut-center strong { font-size: 16px; }
+  .legend-row { gap: 7px; padding: 6px 0; font-size: 11px; }
+  .legend-name { gap: 6px; white-space: normal; }
+  .legend-row strong { font-size: 12px; }
+  .legend-row > span:last-child { font-size: 10px; }
+  .asset-list { padding-top: 8px; }
+  .asset-row { min-height: 54px; }
+  .asset-icon { width: 32px; height: 32px; border-radius: 9px; }
+  .asset-info { margin-left: 9px; }
+  .asset-info strong, .asset-value strong { font-size: 13px; }
+  .asset-info small, .asset-value small { font-size: 11px; }
+
+  /* Coach and profile stay readable while using less vertical space */
+  .feature-card { gap: 13px; min-height: 0; }
+  .live-coach { align-items: flex-start; flex-direction: row; }
+  .coach-score { width: 78px; height: 114px; flex: 0 0 78px; border-radius: 15px; }
+  .coach-score strong { font-size: 29px; }
+  .coach-score span { font-size: 8px; text-align: center; }
+  .coach-score b { margin-top: 8px; padding: 4px 6px; font-size: 8px; }
+  .diagnostic-list { margin-top: 10px; }
+  .diagnostic-item { gap: 7px; padding: 7px 0; }
+  .diagnostic-item strong { font-size: 12px; }
+  .diagnostic-item small { font-size: 11px; }
+  .coach-disclaimer { font-size: 10px; }
+
+  /* Forms use two columns only where the fields remain comfortable to tap */
+  .asset-form, .cashflow-form, .profile-form, .monthly-savings-form, .loan-form { gap: 10px; margin-top: 14px; padding: 13px; }
+  .asset-form { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .asset-form label:nth-child(3), .asset-form .form-actions { grid-column: 1 / -1; }
+  .cashflow-form { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .cashflow-form label:nth-child(3), .cashflow-form .form-actions { grid-column: 1 / -1; }
+  .profile-form { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .profile-form button { grid-column: 1 / -1; }
+  .monthly-savings-form { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .monthly-savings-form button { grid-column: 1 / -1; }
+  .loan-form { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .loan-form label:first-child, .loan-form .form-actions { grid-column: 1 / -1; }
+  .asset-form label, .cashflow-form label, .profile-form label, .monthly-savings-form label, .loan-form label { gap: 6px; font-size: 12px; }
+  .asset-form input, .asset-form select, .cashflow-form input, .cashflow-form select, .profile-form input, .profile-form select, .monthly-savings-form input, .loan-form input, .payment-output { height: 48px; font-size: 16px; }
+  .asset-form button, .cashflow-form button, .profile-form button, .monthly-savings-form button, .loan-form button { min-height: 48px; font-size: 14px; }
+  .form-actions { width: 100%; }
+  .form-actions > button { width: auto; min-width: 0; }
+
+  /* Financial records */
+  .monthly-savings-overview { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; margin-top: 14px; }
+  .monthly-savings-overview > div { padding: 11px; }
+  .monthly-savings-note { gap: 5px; }
+  .cashflow-summary { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; margin-top: 14px; }
+  .cashflow-summary > div { min-width: 0; padding: 10px 7px; }
+  .cashflow-summary span { font-size: 10px; }
+  .cashflow-summary strong { overflow-wrap: anywhere; font-size: 13px; }
+  .cashflow-lists { gap: 10px; }
+  .cashflow-list { padding: 12px; }
+  .saved-assets { margin-top: 10px; }
+  .saved-asset-row { min-height: 0; flex-wrap: wrap; gap: 7px; padding: 11px 10px; }
+  .saved-asset-row > span { min-width: 130px; flex: 1; }
+  .saved-asset-row > span strong, .saved-asset-row > b { font-size: 13px; }
+  .saved-asset-row > span small { font-size: 11px; }
+  .saved-asset-row > button { min-height: 30px; padding: 5px 7px; }
+  .saved-total strong, .cashflow-balance strong { font-size: 15px; }
+  .saved-total span, .cashflow-balance span, .loan-totals { font-size: 10px; }
+  .loan-burden { padding: 12px; }
+  .loan-totals { align-items: flex-end; }
+  .debt-row { min-width: 570px; }
+
+  /* Charts scroll horizontally only when there are many months */
+  .history-panel, .real-assets-panel, .monthly-savings-panel, .profile-panel, .cashflow-panel { margin-bottom: 14px; }
+  .history-summary { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 12px; }
+  .history-summary > span { display: flex; flex-direction: column; gap: 3px; }
+  .history-summary strong { margin-left: 0; font-size: 12px; }
+  .history-chart { height: 170px; overflow-x: auto; gap: 8px; padding: 14px 10px 7px; }
+  .history-month { min-width: 44px; }
+  .history-legend { flex-wrap: wrap; gap: 8px 12px; }
+  .history-legend b { width: 100%; margin-left: 0; }
+  .history-savings-section { padding: 12px; }
+  .monthly-savings-history-head { align-items: flex-start; flex-direction: column; gap: 5px; }
+  .monthly-savings-chart { height: 135px; margin-top: 10px; }
+  .benchmark-note, .real-data-note { font-size: 11px; }
+
+  .account-settings-panel { gap: 16px; margin-top: 14px; padding: 19px 16px; }
+  .account-settings-copy h2 { font-size: 19px; }
+  .account-settings-copy > p:last-child { font-size: 12px; }
+  .account-settings-controls { grid-template-columns: 1fr 1fr; }
+  .account-backup-button, .account-delete-open { justify-content: center; padding: 0 10px; font-size: 12px; }
+  footer { gap: 7px; padding-top: 20px; font-size: 11px; }
+
+  /* Login: keep a compact brand header instead of a tall illustration panel */
+  .auth-page { min-height: 100svh; display: flex; flex-direction: column; padding: 0; }
+  .auth-intro { min-height: 64px; height: 64px; display: flex; flex: 0 0 64px; align-items: center; justify-content: center; padding: 0 16px; }
+  .auth-intro > div, .auth-intro > ul { display: none; }
+  .auth-brand { align-self: center; font-size: 15px; }
+  .auth-brand .brand-mark { width: 32px; height: 32px; }
+  .auth-card { width: calc(100% - 32px); margin: 0 auto; padding: 27px 0 34px; }
+  .auth-card-heading > span { font-size: 10px; }
+  .auth-card-heading h2 { margin: 6px 0; font-size: 26px; }
+  .auth-card-heading p { margin-bottom: 19px; font-size: 12px; }
+  .google-button, .auth-form input, .auth-primary, .auth-secondary { height: 50px; font-size: 16px; }
+  .auth-divider { margin: 15px 0; }
+  .auth-form { gap: 11px; }
+  .auth-form label { font-size: 13px; }
+  .auth-terms { margin-top: 15px; font-size: 10px; }
+
+  /* Public introduction page */
+  .landing-header { height: 66px; }
+  .landing-header .brand { gap: 8px; font-size: 14px; }
+  .landing-header .brand-mark { width: 31px; height: 31px; }
+  .landing-header .landing-login { padding: 8px 12px; font-size: 12px; }
+  .landing-hero { min-height: 0; grid-template-columns: minmax(0, 1fr); gap: 32px; padding: 30px 0 48px; }
+  .landing-eyebrow { margin-bottom: 12px; font-size: 11px; }
+  .landing-hero h1 { font-size: 34px; line-height: 1.2; letter-spacing: -1.8px; }
+  .landing-hero-copy > p:not(.landing-eyebrow) { margin-top: 16px; font-size: 15px; line-height: 1.65; }
+  .landing-actions { gap: 9px; margin-top: 21px; }
+  .landing-primary, .landing-secondary { min-height: 49px; font-size: 14px; }
+  .landing-benefits { display: grid; grid-template-columns: 1fr 1fr; align-items: start; gap: 9px 12px; margin-top: 18px; font-size: 11px; text-align: left; }
+  .landing-benefits li:last-child { grid-column: 1 / -1; }
+  .landing-check { width: 18px; height: 18px; flex-basis: 18px; }
+  .landing-preview { width: 100%; overflow: hidden; padding: 12px; }
+  .landing-preview-top { padding-bottom: 12px; font-size: 12px; }
+  .landing-preview-cards { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+  .landing-preview-cards article { min-width: 0; padding: 12px; border-radius: 13px; }
+  .landing-preview-cards article > span { font-size: 10px; }
+  .landing-preview-cards strong { overflow-wrap: anywhere; margin-top: 7px; font-size: 17px; }
+  .landing-preview-cards strong small { font-size: 9px; }
+  .landing-preview-cards p { display: none; }
+  .landing-preview-chart { grid-template-columns: 100px minmax(0, 1fr); justify-items: stretch; gap: 12px; padding: 14px 12px; }
+  .landing-donut { width: 94px; height: 94px; }
+  .landing-donut:after { inset: 15px; }
+  .landing-donut span { font-size: 8px; }
+  .landing-donut strong { font-size: 15px; }
+  .landing-preview-legend { gap: 7px; }
+  .landing-preview-legend p { grid-template-columns: 7px 1fr auto; gap: 5px; font-size: 9px; }
+  .landing-preview-legend p > i { width: 7px; height: 7px; }
+  .landing-coach-sample { padding: 12px; }
+  .landing-features { padding: 55px 16px; }
+  .landing-section-heading { margin-bottom: 28px; }
+  .landing-section-heading h2, .landing-safety h2, .landing-cta h2 { font-size: 27px; }
+  .landing-section-heading > span { margin-top: 10px; font-size: 13px; }
+  .landing-feature-grid { gap: 11px; }
+  .landing-feature-grid article { min-height: 0; padding: 20px; border-radius: 16px; }
+  .landing-feature-grid article > i { width: 39px; height: 39px; border-radius: 11px; }
+  .landing-feature-grid h3 { margin: 14px 0 7px; font-size: 17px; }
+  .landing-feature-grid p { font-size: 13px; line-height: 1.6; }
+  .landing-safety { gap: 23px; margin: 55px auto; padding: 28px 20px; border-radius: 20px; }
+  .landing-safety ul { gap: 12px; }
+  .landing-safety li strong { font-size: 14px; }
+  .landing-safety li small { font-size: 12px; }
+  .landing-cta { margin: 45px auto 55px; padding: 38px 18px; border-radius: 22px; }
+  .landing-cta p { margin-bottom: 20px; font-size: 13px; }
+  .landing-footer { padding: 21px 0 28px; font-size: 11px; }
+}
+
+@media (max-width: 359px) {
+  .summary-grid { grid-template-columns: 1fr; }
+  .summary-grid .rank-card { grid-column: auto; }
+  .allocation-body { grid-template-columns: 96px minmax(0, 1fr); }
+  .donut { width: 92px; flex-basis: 92px; }
+  .landing-preview-chart { grid-template-columns: 86px minmax(0, 1fr); }
+  .landing-donut { width: 82px; height: 82px; }
+}
