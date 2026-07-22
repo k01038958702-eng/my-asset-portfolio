@@ -672,7 +672,10 @@ body { font-size: 16px; }
   .asset-form label:nth-child(3), .asset-form .form-actions { grid-column: 1 / -1; }
   .cashflow-form { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .cashflow-form label:nth-child(3), .cashflow-form .form-actions { grid-column: 1 / -1; }
-  .profile-form { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .profile-form { grid-template-columns: minmax(0, .9fr) minmax(0, 1.15fr) minmax(0, .75fr); }
+  .profile-form label { min-width: 0; }
+  .profile-form input, .profile-form select { width: 100%; min-width: 0; padding-left: 8px; padding-right: 8px; }
+  .profile-form label:first-child input, .profile-form label:nth-child(3) input { text-align: center; }
   .profile-form button { grid-column: 1 / -1; }
   .monthly-savings-form { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .monthly-savings-form button { grid-column: 1 / -1; }
@@ -795,6 +798,8 @@ body { font-size: 16px; }
 @media (max-width: 359px) {
   .summary-grid { grid-template-columns: 1fr; }
   .summary-grid .rank-card { grid-column: auto; }
+  .profile-form { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .profile-form label:nth-child(3) { grid-column: 1 / -1; }
   .allocation-body { grid-template-columns: 96px minmax(0, 1fr); }
   .donut { width: 92px; flex-basis: 92px; }
   .landing-preview-chart { grid-template-columns: 86px minmax(0, 1fr); }
